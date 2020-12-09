@@ -7,17 +7,27 @@ import javax.persistence.Id;
 
 @Entity
 public class Book {
-    @Id @GeneratedValue (strategy = GenerationType.AUTO)
-    Integer id;
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    Long id;
     String title;
     Integer price;
     Integer stock;
 
-    public Integer getId() {
+    public Book() {
+    }
+
+    public Book(String title, Integer price, Integer stock) {
+        this.title = title;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
