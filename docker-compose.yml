@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  store-api:
+    image: bookstore-web-api:1.0.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - store-db
+
+  store-db:
+    image: mysql:5
+    ports:
+    - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: store
+      MYSQL_USER: storeadmin
+      MYSQL_PASSWORD: password
