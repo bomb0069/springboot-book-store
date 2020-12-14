@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -27,13 +24,12 @@ public class OrderService {
     @Autowired
     PaymentGateway paymentGateway;
 
-    private static final HashMap<Long, Book> bookDocument = new HashMap<>();
+    private static final Map<Long, Book> bookDocument = new HashMap<>();
 
     @Autowired
     public void init() {
         Iterable<Book> books = bookRepository.findAll();
         books.forEach(book -> bookDocument.put(book.getId(), book));
-        System.out.println("initial book document completed");
     }
 
     @Transactional
