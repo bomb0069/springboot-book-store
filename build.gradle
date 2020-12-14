@@ -29,5 +29,7 @@ pmd {
 	consoleOutput = true
 	toolVersion = "6.21.0"
 	rulePriority = 5
-	ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+	ruleSetFiles = files("custom-pmd-ruleset.xml")
+	ruleSets = []
+//	ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
 }
