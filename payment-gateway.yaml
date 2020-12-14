@@ -3,7 +3,7 @@
     url: /payment
     post: >
       {
-        "transactionAmount": 375.00,
+        "transactionAmount": 500.00,
         "paymentDetail": {
           "cardNumber": "1111111111111111",
           "expiredDate": "2030-11",

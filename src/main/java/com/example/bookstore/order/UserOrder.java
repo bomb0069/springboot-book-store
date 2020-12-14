@@ -14,6 +14,9 @@ public class UserOrder {
     @OneToMany(mappedBy = "userOrder")
     List<OrderedBook> orderedBookList;
 
+    public UserOrder() {
+    }
+
     public UserOrder(double totalPrice, List<OrderedBook> orderedBookList) {
         this.totalPrice = totalPrice;
         this.orderedBookList = orderedBookList;
