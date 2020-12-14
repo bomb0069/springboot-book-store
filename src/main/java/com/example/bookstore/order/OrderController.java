@@ -5,14 +5,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class OrderController {
 
     @Autowired
-    static OrderService orderService;
+    OrderService orderService;
 
     @PostMapping("/orders")
-    public PostOrderResponse postOrder(@RequestBody PostOrderRequest postOrderRequest) {
+    public PostOrderResponse postOrder(@Valid @RequestBody PostOrderRequest postOrderRequest) {
         PostOrderResponse postOrderResponse = new PostOrderResponse();
         OrderDetail orderDetail = orderService.orderBook(postOrderRequest.bookOrderList);
         postOrderResponse.setOrderId(orderDetail.orderId);
