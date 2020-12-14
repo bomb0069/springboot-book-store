@@ -11,8 +11,8 @@ public class UserOrder {
     double totalPrice;
     boolean isDone;
 
-    public UserOrder() {
-    }
+    @OneToMany(mappedBy = "userOrder")
+    List<OrderedBook> orderedBookList;
 
     public UserOrder(double totalPrice, List<OrderedBook> orderedBookList) {
         this.totalPrice = totalPrice;
@@ -36,10 +36,6 @@ public class UserOrder {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
     public void setDone(boolean done) {
         isDone = done;
     }
@@ -52,7 +48,5 @@ public class UserOrder {
         this.orderedBookList = orderedBookList;
     }
 
-    @OneToMany(mappedBy = "id")
-    List<OrderedBook> orderedBookList;
 
 }

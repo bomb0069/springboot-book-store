@@ -1,14 +1,20 @@
 package com.example.bookstore.order;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class OrderedBook {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     Integer bookId;
     Integer quantity;
+
+    @ManyToOne
+    @JoinColumn (name = "userOrder")
+    @NotNull
+    UserOrder userOrder;
 
     public Long getId() {
         return id;
@@ -32,5 +38,13 @@ public class OrderedBook {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public UserOrder getUserOrder() {
+        return userOrder;
+    }
+
+    public void setUserOrder(UserOrder userOrder) {
+        this.userOrder = userOrder;
     }
 }
