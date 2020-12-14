@@ -1,5 +1,6 @@
 package com.example.bookstore.order;
 
+import com.example.bookstore.gateway.PaymentGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,15 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
 
     @Autowired
-    OrderRepository orderRepository;
+    UserOrderRepository userOrderRepository;
 
     @Autowired
     OrderedBookRepository orderedBookRepository;
+
+    @Autowired
+    PaymentGateway paymentGateway;
 
     @Transactional
     public OrderDetail orderBook(List<BookOrder> bookOrderList) {
@@ -27,15 +32,14 @@ public class OrderService {
             orderedBook.setQuantity(bookOrder.quantity);
             orderedBookList.add(orderedBook);
         }
-        UserOrder userOrder = new UserOrder(totalPrice,orderedBookList);
-        orderRepository.save(userOrder);
-
+        UserOrder userOrder = new UserOrder(totalPrice, orderedBookList);
+        userOrderRepository.save(userOrder);
         Iterator<OrderedBook> iterator = userOrder.orderedBookList.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             iterator.next().setUserOrder(userOrder);
         }
         orderedBookRepository.saveAll(userOrder.orderedBookList);
-        return new OrderDetail(userOrder.id,userOrder.totalPrice);
+        return new OrderDetail(userOrder.id, userOrder.totalPrice);
     }
 
     private double calculateTotalPrice(List<BookOrder> bookOrderList) {
@@ -51,4 +55,16 @@ public class OrderService {
         return 375;
     }
 
+    public void paymentOrder(Long orderId, PaymentDetail paymentDetail) {
+        Optional<UserOrder> userOrder = userOrderRepository.findById(orderId);
+        if (userOrder.isPresent()) {
+            boolean paymentStatus = paymentGateway.createOrderTransaction(userOrder.get().totalPrice,paymentDetail);
+            if (paymentStatus == true) {
+                userOrder.get().setDone(true);
+                userOrderRepository.save(userOrder.get());
+                return;
+            }
+            throw new RuntimeException("OrderService : paymentOrder Error");
+        }
+    }
 }
