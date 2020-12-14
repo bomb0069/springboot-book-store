@@ -11,7 +11,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    static BookRepository bookRepository;
+    BookRepository bookRepository;
 
     @GetMapping("/books")
     public List<BookResponse> getAllBooks() {
