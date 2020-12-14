@@ -8,6 +8,11 @@ public class PostOrderResponse {
     @JsonProperty("total_price")
     double totalPrice;
 
+    public PostOrderResponse(Long orderId, double totalPrice) {
+        this.orderId = orderId;
+        this.totalPrice = totalPrice;
+    }
+
     public Long getOrderId() {
         return orderId;
     }

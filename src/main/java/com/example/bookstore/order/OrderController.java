@@ -15,10 +15,8 @@ public class OrderController {
 
     @PostMapping("/orders")
     public PostOrderResponse postOrder(@Valid @RequestBody PostOrderRequest postOrderRequest) {
-        PostOrderResponse postOrderResponse = new PostOrderResponse();
         OrderDetail orderDetail = orderService.orderBook(postOrderRequest.bookOrderList);
-        postOrderResponse.setOrderId(orderDetail.orderId);
-        postOrderResponse.setTotalPrice(orderDetail.totalPrice);
-        return postOrderResponse;
+        return new PostOrderResponse(orderDetail.orderId, orderDetail.totalPrice);
     }
+
 }
