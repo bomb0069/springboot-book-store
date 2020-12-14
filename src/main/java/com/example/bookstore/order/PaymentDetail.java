@@ -1,13 +1,15 @@
 package com.example.bookstore.order;
 
+import java.time.YearMonth;
+
 public class PaymentDetail {
     String cardNumber;
     String expiredDate;
     String cvv;
 
-    public PaymentDetail(String cardNumber, String expiredDate, String cvv) {
+    public PaymentDetail(String cardNumber, YearMonth expiredDate, String cvv) {
         this.cardNumber = cardNumber;
-        this.expiredDate = expiredDate;
+        this.expiredDate = expiredDate.toString();
         this.cvv = cvv;
     }
 

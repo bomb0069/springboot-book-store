@@ -57,7 +57,7 @@ public class OrderService {
 
     private double calculateTotalPrice(List<BookOrder> bookOrderList) {
         double totalPrice = 0;
-        for (BookOrder bookOrder :bookOrderList) {
+        for (BookOrder bookOrder : bookOrderList) {
             totalPrice += bookDocument.get(bookOrder.bookId.longValue()).getPrice() * bookOrder.quantity;
         }
 
@@ -69,6 +69,7 @@ public class OrderService {
         return totalPrice;
     }
 
+    @Transactional
     public void paymentOrder(Long orderId, PaymentDetail paymentDetail) {
         Optional<UserOrder> userOrder = userOrderRepository.findById(orderId);
         if (userOrder.isPresent()) {
@@ -76,6 +77,10 @@ public class OrderService {
             if (paymentStatus == true) {
                 userOrder.get().setDone(true);
                 userOrderRepository.save(userOrder.get());
+
+                for (OrderedBook orderedBook : userOrder.get().orderedBookList) {
+                    bookRepository.removeFromStock(orderedBook.bookId, orderedBook.quantity);
+                }
                 return;
             }
             throw new RuntimeException("OrderService : paymentOrder Error");

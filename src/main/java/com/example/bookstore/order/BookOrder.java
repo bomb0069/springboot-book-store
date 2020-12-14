@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 class BookOrder {
     @JsonProperty("book_id")
-    Integer bookId;
+    Long bookId;
     Integer quantity;
 
-    public BookOrder(Integer bookId, Integer quantity) {
+    public BookOrder(Long bookId, Integer quantity) {
         this.bookId = bookId;
         this.quantity = quantity;
     }
 
-    public Integer getBookId() {
+    public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(Integer bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 

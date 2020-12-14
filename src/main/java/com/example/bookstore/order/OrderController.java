@@ -24,7 +24,7 @@ public class OrderController {
 
     @PostMapping("/orders/{orderId}/payment")
     public Map paymentToOrder(@PathVariable Long orderId, @Valid @RequestBody PaymentToOrderRequest paymentToOrderRequest) {
-        PaymentDetail paymentDetail = new PaymentDetail(paymentToOrderRequest.cardNumber, paymentToOrderRequest.cardNumber, paymentToOrderRequest.cvv);
+        PaymentDetail paymentDetail = new PaymentDetail(paymentToOrderRequest.cardNumber, paymentToOrderRequest.expiredDate, paymentToOrderRequest.cvv);
         orderService.paymentOrder(orderId, paymentDetail);
         return Collections.singletonMap("message", "your order is successed");
     }

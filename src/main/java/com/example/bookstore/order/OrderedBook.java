@@ -8,7 +8,7 @@ public class OrderedBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    Integer bookId;
+    Long bookId;
     Integer quantity;
 
     @ManyToOne
@@ -24,11 +24,11 @@ public class OrderedBook {
         this.id = id;
     }
 
-    public Integer getBookId() {
+    public Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(Integer bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
