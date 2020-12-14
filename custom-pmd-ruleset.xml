@@ -15,7 +15,8 @@
     </rule>
 
         <rule ref="category/java/bestpractices.xml">
-
-    </rule>
+            <exclude name="JUnitAssertionsShouldIncludeMessage"/>
+            <exclude name="JUnitTestContainsTooManyAsserts"/>
+        </rule>
 
 </ruleset>
