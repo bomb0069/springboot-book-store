@@ -2,5 +2,5 @@ package com.example.bookstore.order;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepository extends CrudRepository <UserOrder, Long> {
+public interface UserOrderRepository extends CrudRepository <UserOrder, Long> {
 }
