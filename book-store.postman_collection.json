@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "4e960aee-05a8-4f41-8ca7-da1e3b1e2a34",
+		"name": "Book Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Success with Discounted",
+			"item": [
+				{
+					"name": "1.List all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "af992aae-7ac5-4b77-8afa-1e136477db2f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"List contains has 5 item\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    console.log(jsonData.length);\r",
+									"    pm.expect(jsonData.length).to.eql(5);\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"    \"$schema\": \"http://json-schema.org/draft-07/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"array\",\r",
+									"    \"title\": \"The root schema\",\r",
+									"    \"description\": \"The root schema comprises the entire JSON document.\",\r",
+									"    \"default\": [],\r",
+									"    \"examples\": [\r",
+									"        [\r",
+									"            {\r",
+									"                \"id\": 1,\r",
+									"                \"title\": \"Harry Potter and the Philosopher's Stone\",\r",
+									"                \"price\": 100,\r",
+									"                \"stock\": 100\r",
+									"            },\r",
+									"            {\r",
+									"                \"id\": 2,\r",
+									"                \"title\": \"Harry Potter and the Chamber of Secrets\",\r",
+									"                \"price\": 100,\r",
+									"                \"stock\": 100\r",
+									"            }\r",
+									"        ]\r",
+									"    ],\r",
+									"    \"additionalItems\": true,\r",
+									"    \"items\": {\r",
+									"        \"$id\": \"#/items\",\r",
+									"        \"anyOf\": [\r",
+									"            {\r",
+									"                \"$id\": \"#/items/anyOf/0\",\r",
+									"                \"type\": \"object\",\r",
+									"                \"title\": \"The first anyOf schema\",\r",
+									"                \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                \"default\": {},\r",
+									"                \"examples\": [\r",
+									"                    {\r",
+									"                        \"id\": 1,\r",
+									"                        \"title\": \"Harry Potter and the Philosopher's Stone\",\r",
+									"                        \"price\": 100,\r",
+									"                        \"stock\": 100\r",
+									"                    }\r",
+									"                ],\r",
+									"                \"required\": [\r",
+									"                    \"id\",\r",
+									"                    \"title\",\r",
+									"                    \"price\",\r",
+									"                    \"stock\"\r",
+									"                ],\r",
+									"                \"properties\": {\r",
+									"                    \"id\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/id\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"title\": \"The id schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            1\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"title\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/title\",\r",
+									"                        \"type\": \"string\",\r",
+									"                        \"title\": \"The title schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": \"\",\r",
+									"                        \"examples\": [\r",
+									"                            \"Harry Potter and the Philosopher's Stone\"\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"price\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/price\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"title\": \"The price schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            100\r",
+									"                        ]\r",
+									"                    },\r",
+									"                    \"stock\": {\r",
+									"                        \"$id\": \"#/items/anyOf/0/properties/stock\",\r",
+									"                        \"type\": \"integer\",\r",
+									"                        \"title\": \"The stock schema\",\r",
+									"                        \"description\": \"An explanation about the purpose of this instance.\",\r",
+									"                        \"default\": 0,\r",
+									"                        \"examples\": [\r",
+									"                            100\r",
+									"                        ]\r",
+									"                    }\r",
+									"                },\r",
+									"                \"additionalProperties\": true\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test('Schema is valid', function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/books",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1.List all books",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/books",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"books"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Harry Potter and the Philosopher's Stone\",\n        \"price\": 100,\n        \"stock\": 100\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Harry Potter and the Chamber of Secrets\",\n        \"price\": 100,\n        \"stock\": 100\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Harry Potter and the Prisoner of Azkaban\",\n        \"price\": 100,\n        \"stock\": 100\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Harry Potter and the Goblet of Fire\",\n        \"price\": 100,\n        \"stock\": 100\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Harry Potter and the Order of the Phoenix\",\n        \"price\": 100,\n        \"stock\": 100\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "2.Order selected book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e8e0f25-8630-44b6-88a8-b3d3d5a119f6",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Total price should be 375\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.total_price).to.eql(375);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response should have order id when success\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"order_id\");\r",
+									"    pm.environment.set(\"order_id\", jsonData.order_id);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookOrderList\": [\r\n        {\r\n            \"book_id\": 1,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"book_id\": 2,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"book_id\": 3,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"book_id\": 4,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"book_id\": 5,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/orders",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "2.Order selected book",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\": 1,\r\n        \"quantity\": 1\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"quantity\": 1\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"quantity\": 1\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"quantity\": 1\r\n    },\r\n    {\r\n        \"id\": 5,\r\n        \"quantity\": 1\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/orders",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"order_id\": 1,\r\n    \"total_price\": 375\r\n}"
+						}
+					]
+				},
+				{
+					"name": "3.Payment order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea98994b-6ebe-4945-a619-08b44d41d69f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message should be 'your order is successed'\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"your order is successed\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardNumber\": \"1111111111111111\",\r\n    \"expiredDate\": \"2030-11\",\r\n    \"cvv\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/orders/{{order_id}}/payment",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}",
+								"payment"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "3.Payment order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"order_id\": {{order_id}},\r\n    \"payment\": {\r\n        \"card_number\": \"111111111111\",\r\n        \"expried_date\": \"11/2030\",\r\n        \"cvv\": \"123\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/orders/{{order_id}}/payment",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"orders",
+										"{{order_id}}",
+										"payment"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"your order is successed\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Success without Discounted",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
