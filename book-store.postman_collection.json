@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Success with Discounted",
+			"name": "Success without Discounted",
 			"item": [
 				{
 					"name": "1.List all books",
@@ -360,11 +360,6 @@
 					]
 				}
 			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Success without Discounted",
-			"item": [],
 			"protocolProfileBehavior": {}
 		}
 	],
