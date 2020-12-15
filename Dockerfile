@@ -6,6 +6,5 @@ RUN ./gradlew clean build
 FROM openjdk:11.0.9.1-jre-buster
 WORKDIR /app/bin/
 COPY --from=BUILD_STAGE /workspace/app/build/libs/*.jar .
-RUN ls
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "bookstore-0.0.1-SNAPSHOT.jar"]
