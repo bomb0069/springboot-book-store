@@ -11,6 +11,7 @@ pipeline {
 
         stage('Static Code Analysis') {
             steps {
+                sh 'chmod +x gradlew'
                 sh './gradlew check'
             }
         }
